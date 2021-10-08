@@ -40,7 +40,7 @@ exports.getInterests = (response, statement, data) => {
     });
 };
 exports.updateInterests = (response, findIdStatement, updateStatement, id, data) => {
-    conn.query(findIdStatement, req.params.id, (err, rows, field) => {
+    conn.query(findIdStatement, id, (err, rows, field) => {
         if (err) {
             return response.status(500).json({ message: 'Error to find the data ID', error: err });
         }

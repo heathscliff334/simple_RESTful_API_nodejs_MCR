@@ -1,8 +1,6 @@
 const conn = require('../config/database');
 
 const { responseData, responseMessage } = require('../utils/response-handler');
-const { response } = require('express');
-const e = require('express');
 
 exports.insertLanguages = (response, statementGet, statementInsert, data) => {
     let tempId;
@@ -39,20 +37,25 @@ exports.getLanguages = (response, statement, data) => {
     });
 };
 exports.updateLanguages = (response, findIdStatement, updateStatement, id, data) => {
-    conn.query(findIdStatement, req.params.id, (err, row, field) => {
+    conn.query(findIdStatement, id, (err, rows, field) => {
         if (err) {
-            return response.status(500).json({ message: 'Error to find the ID', error: err });
+            return response.status(500).json({ message: 'Error to find the data ID', error: err });
         }
+
         if (rows.length) {
             console.log('ID Found!');
+            console.log([data, id]);
             conn.query(updateStatement, [data, id], (err, rows, field) => {
                 if (err) {
-                    return response.status(500).json({ message: 'Error to update the data', error: err });
-                } else {
-                    console.log('ID not found!');
-                    return response.status(404).json({ message: 'ID not found', error: err });
+                    return response.status(500).json({ message: 'Failed to update the data', error: err });
                 }
+                responseMessage(response, 200, 'Data updated successfuly');
             });
+
+
+        } else {
+            console.log('ID Not Found!');
+            return response.status(404).json({ message: 'ID is not found', error: err, success: false });
         }
     });
 };
