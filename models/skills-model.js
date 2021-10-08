@@ -1,38 +1,12 @@
+const { response } = require('express');
 const conn = require('../config/database');
-
 const {
     responseData,
     responseMessage,
     responseError
 } = require('../utils/response-handler');
 
-exports.insertLanguages = (response, statementGet, statementInsert, data) => {
-    let tempId;
-
-    conn.query(statementGet, (err, rows, field) => {
-        if (err) {
-            return responseError(response, 500, 'Failed to find the last ID', err);
-        } else {
-            tempId = rows[0]['last_id'];
-            if (tempId == null) {
-                tempId = 1;
-            } else {
-                tempId = ++tempId;
-            }
-            console.log(tempId);
-            data.id_language = tempId;
-            console.log(data);
-            conn.query(statementInsert, data, (err, rows, field) => {
-                if (err) {
-                    return responseError(response, 500, 'Failed to insert the data', err);
-                }
-                responseMessage(response, 201, 'Success to insert the data');
-            });
-
-        }
-    });
-};
-exports.getLanguages = (response, statement, data) => {
+exports.getSkills = (response, statement, data) => {
     conn.query(statement, data, (err, rows, field) => {
         if (err) {
             return responseError(response, 500, 'Failed to get the data', err);
@@ -40,7 +14,30 @@ exports.getLanguages = (response, statement, data) => {
         responseData(response, 200, rows);
     });
 };
-exports.updateLanguages = (response, findIdStatement, updateStatement, id, data) => {
+exports.insertSkills = (response, getState, insertState, data) => {
+    let tempId;
+    conn.query(getState, (err, rows, field) => {
+        if (err) {
+            return responseError(response, 500, 'Failed to get the ID', err);
+        } else {
+            tempId = rows[0]['last_id'];
+            if (tempId == null) {
+                tempId = 1;
+            } else {
+                tempId = ++tempId;
+            }
+            data.id_skill = tempId;
+            conn.query(insertState, data, (err, rows, field) => {
+                if (err) {
+                    return responseError(response, 500, 'Failed to insert the data', err);
+                }
+                responseMessage(response, 200, 'Success to insert the data');
+            });
+        }
+
+    });
+};
+exports.updateSkills = (response, findIdStatement, updateStatement, id, data) => {
     conn.query(findIdStatement, id, (err, rows, field) => {
         if (err) {
             return responseError(response, 500, 'Failed to find the ID', err);
@@ -63,7 +60,7 @@ exports.updateLanguages = (response, findIdStatement, updateStatement, id, data)
         }
     });
 };
-exports.deleteLanguages = (response, findIdStatement, deleteStatement, id) => {
+exports.deleteSkills = (response, findIdStatement, deleteStatement, id) => {
     conn.query(findIdStatement, id, (err, rows, field) => {
         if (err) {
             return responseError(response, 500, 'Failed to find the ID', err);

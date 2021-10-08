@@ -7,8 +7,7 @@ const {
 } = require('../models/interests-model');
 
 exports.createData = (req, res) => {
-    // const id_temp = uniqid();
-    // lastInterestId();
+
     const queryGetId = 'SELECT MAX(id_interest) as last_id FROM tb_interests';
     // const data = { id_interest: id_temp, ...req.body };
     const data = {...req.body };

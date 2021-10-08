@@ -1,4 +1,4 @@
-const responseData = function(response, statusCode, values){
+const responseData = function(response, statusCode, values) {
     var data = {
         success: true,
         data: values
@@ -7,7 +7,7 @@ const responseData = function(response, statusCode, values){
     response.end();
 };
 
-const responseMessage = function(response, statusCode, message){
+const responseMessage = function(response, statusCode, message) {
     var data = {
         success: true,
         message: message
@@ -16,4 +16,14 @@ const responseMessage = function(response, statusCode, message){
     response.end();
 };
 
-module.exports = {responseData, responseMessage};
+const responseError = function(response, statusCode, message, error) {
+    var data = {
+        success: false,
+        message: message,
+        error: error
+    };
+    response.status(statusCode).json(data);
+    response.end();
+}
+
+module.exports = { responseData, responseMessage, responseError };
