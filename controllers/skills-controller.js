@@ -8,7 +8,8 @@ const {
 exports.getData = (req, res) => {
     const data = {...req.body };
     const query = 'SELECT * FROM tb_skills';
-    getSkills(res, query, data);
+    const queryLang = 'SELECT * FROM tb_languages';
+    getSkills(res, query, queryLang, data);
 
 };
 exports.createData = (req, res) => {

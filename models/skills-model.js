@@ -6,12 +6,23 @@ const {
     responseError
 } = require('../utils/response-handler');
 
-exports.getSkills = (response, statement, data) => {
+exports.getSkills = (response, statement, statementLang, data) => {
     conn.query(statement, data, (err, rows, field) => {
         if (err) {
-            return responseError(response, 500, 'Failed to get the data', err);
+            return responseError(response, 500, 'Failed to get the skills', err);
+        } 
+        else {
+            skillsData = rows;
+            conn.query(statementLang, data, (err, rows, field) => {
+                if (err) {
+                    return responseError(response, 500, 'Failed to get the languages', err);
+                }
+                var data = {"skills": skillsData,"languages": rows}
+                responseData(response, 200, data);
+            });            
         }
-        responseData(response, 200, rows);
+
+        // responseData(response, 200, rows);
     });
 };
 exports.insertSkills = (response, getState, insertState, data) => {
@@ -24,7 +35,7 @@ exports.insertSkills = (response, getState, insertState, data) => {
             if (tempId == null) {
                 tempId = 1;
             } else {
-                tempId = ++tempId;
+                tempId = (tempId + 1);
             }
             data.id_skill = tempId;
             conn.query(insertState, data, (err, rows, field) => {
