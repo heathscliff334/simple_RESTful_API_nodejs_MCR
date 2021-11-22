@@ -7,7 +7,7 @@ const {
 
 exports.getData = (req, res) => {
     const data = {...req.body };
-    const query = 'SELECT * FROM tb_projects';
+    const query = 'SELECT * FROM tb_projects WHERE user_id = 1 ORDER BY id_project DESC';
     getProjects(res, query, data);
 
 };
