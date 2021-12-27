@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express');
 const http = require('http');
 const https = require('https');
@@ -12,6 +14,7 @@ const { query } = require('./config/database');
 
 var cors = require('cors');
 
+
 var options = {
     key: fs.readFileSync('certificates/ssl.key'),
     cert: fs.readFileSync('certificates/ssl.cert')
@@ -19,7 +22,7 @@ var options = {
 
 // Express is used for routing
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || API_PORT;
 // Enable CORS for all route
 app.use(cors());
 // Set up the body parser

@@ -1,24 +1,25 @@
 {
-  "name": "restful-api-lauren",
-  "version": "1.0.0",
-  "description": "This is a restful api with model and controller",
-  "main": "app.js",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "express-force-https": "^1.0.0",
-    "http": "0.0.1-security",
-    "https": "^1.0.0",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.13"
-  },
-  "scripts": {
-    "start": "node app",
-    "dev": "nodemon app"
-  },
-  "author": "kevin lauren",
-  "license": "ISC"
+    "name": "restful-api-lauren",
+    "version": "1.0.0",
+    "description": "This is a restful api with model and controller",
+    "main": "app.js",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "https": "^1.0.0",
+        "jsonwebtoken": "^8.5.1",
+        "mysql": "^2.18.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.13"
+    },
+    "scripts": {
+        "start": "node app",
+        "dev": "nodemon app"
+    },
+    "author": "kevin lauren",
+    "license": "ISC"
 }

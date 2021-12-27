@@ -7,8 +7,8 @@ const {
 
 exports.getData = (req, res) => {
     const data = {...req.body };
-    const query = 'SELECT * FROM tb_skills';
-    const queryLang = 'SELECT * FROM tb_languages';
+    const query = 'SELECT * FROM tb_skills ORDER BY skill_name ASC';
+    const queryLang = 'SELECT * FROM tb_languages ORDER BY language_name ASC';
     getSkills(res, query, queryLang, data);
 
 };
