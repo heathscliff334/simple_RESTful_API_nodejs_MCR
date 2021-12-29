@@ -13,3 +13,5 @@ How to run :
 <pre>node app.js</pre>
 Or you can use nodemon:
 <pre>npm run dev</pre>
+
+You can use / customize your own secret / public / token key in <code>.env</code> file.
