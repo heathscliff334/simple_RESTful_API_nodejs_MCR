@@ -6,13 +6,14 @@ const {
     deleteInterests
 } = require('../models/interests-model');
 
+
 exports.createData = (req, res) => {
 
     const queryGetId = 'SELECT MAX(id_interest) as last_id FROM tb_interests';
     // const data = { id_interest: id_temp, ...req.body };
     const data = {...req.body };
     const queryInsert = 'INSERT INTO tb_interests SET ?';
-    insertInterests(res, queryGetId, queryInsert, data);
+    insertInterests(req, res, queryGetId, queryInsert, data);
 };
 
 exports.getData = (req, res) => {
@@ -24,12 +25,12 @@ exports.updateData = (req, res) => {
     const data = {...req.body };
     const findIdQuery = 'SELECT * FROM tb_interests WHERE id_interest = ?';
     const updateQuery = 'UPDATE tb_interests SET ? WHERE id_interest = ?';
-    updateInterests(res, findIdQuery, updateQuery, req.params.id, data);
+    updateInterests(req, res, findIdQuery, updateQuery, req.params.id, data);
 };
 exports.deleteData = (req, res) => {
     const findIdQuery = 'SELECT * FROM tb_interests WHERE id_interest = ?';
     const deleteQuery = 'DELETE FROM tb_interests WHERE id_interest = ?';
-    deleteInterests(res, findIdQuery, deleteQuery, req.params.id);
+    deleteInterests(req, res, findIdQuery, deleteQuery, req.params.id);
 };
 
 function uniqid(prefix = "", random = false) {
