@@ -1,5 +1,5 @@
 # simple_RESTful_API_nodejs_MCR
-This is a simple RESTful API using NodeJs with 3 packages :
+This is a simple RESTful API using NodeJs with 6 packages :
 <ul>
   <li>Express</li>
   <li>MySQL</li>
